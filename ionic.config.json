@@ -1,0 +1,7 @@
+{
+  "name": "rising-moon",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -37,3 +37,22 @@
 
 // ! commented out until needed
 // @import "@ionic/angular/css/palettes/dark.system.css";
+
+ion-title {
+  font-weight: bold;
+}
+
+ion-label,
+h4 {
+  font-size: 0.9rem;
+  font-weight: bold !important;
+}
+
+ion-note,
+p {
+  font-size: 0.8rem;
+}
+
+.border-bottom {
+  border-bottom: 3.5vh solid var(--ion-color-light);
+}

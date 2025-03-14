@@ -8,18 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <div class="border-bottom">
-    <swiper-container
-      [modules]="swiperModules"
-      [slidesPerView]="1.2"
-      [spaceBetween]="20"
-      [pagination]="{clickable: true, dynamicBullets: true}"
-    >
-      <swiper-slide> <img src="assets/shapes.svg" /> </swiper-slide>
-      <swiper-slide> <img src="assets/shapes.svg" /> </swiper-slide>
-      <swiper-slide> <img src="assets/shapes.svg" /> </swiper-slide>
-    </swiper-container>
-  </div>
+  <app-banner [bannerImages]="banners"> </app-banner>
 
   <ion-list>
     <ion-list-header class="ion-margin-bottom">
@@ -29,24 +18,11 @@
       </ion-label>
     </ion-list-header>
 
-    <ion-item lines="none">
-      <ion-thumbnail slot="start">
-        <img src="assets/shapes.svg" />
-      </ion-thumbnail>
-      <ion-label>
-        <h4>PandaExpress</h4>
-        <ion-text color="medium">
-          <p class="pStyle">Noodles, Rice, Dumplings</p>
-          <span>
-            <ion-icon name="star"></ion-icon>
-            5 .
-          </span>
-          27 minutes . R276.45
-          <ion-text color="tertiary">
-            <p class="distance">3.7 km</p>
-          </ion-text>
-        </ion-text>
-      </ion-label>
-    </ion-item>
+    <ion-item-group *ngIf="restaurants && restaurants.length > 0">
+      <app-restaurant
+        *ngFor="let item of restaurants"
+        [restaurant]="item"
+      ></app-restaurant>
+    </ion-item-group>
   </ion-list>
 </ion-content>

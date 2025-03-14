@@ -1,7 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>home</ion-title>
+    <ion-title>
+      <span>Home</span>
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <div *ngIf="loading">
+    <ion-skeleton-text animated style="height: 25vh"></ion-skeleton-text>
+  </div>
+
+  <app-loader *ngIf="loading"></app-loader>
+  <app-banner *ngIf="!loading" [bannerImages]="banners"> </app-banner>
+
+  <ion-list *ngIf="!loading">
+    <ion-list-header class="ion-margin-bottom">
+      <ion-label>
+        <h4>Restaurants Nearby</h4>
+        <p>Find unique locations near you</p>
+      </ion-label>
+    </ion-list-header>
+
+    <ion-item-group *ngIf="restaurants && restaurants.length > 0">
+      <app-restaurant
+        *ngFor="let item of restaurants"
+        [restaurant]="item"
+      ></app-restaurant>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

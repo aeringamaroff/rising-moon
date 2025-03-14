@@ -1,7 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>home</ion-title>
+    <ion-title>
+      <span>Home</span>
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <div>
+    <swiper-container
+      [modules]="swiperModules"
+      [slidesPerView]="1.2"
+      [spaceBetween]="20"
+      [pagination]="{clickable: true, dynamicBullets: true}"
+    >
+      <swiper-slide> <img src="assets/shapes.svg" /> </swiper-slide>
+      <swiper-slide> <img src="assets/shapes.svg" /> </swiper-slide>
+      <swiper-slide> <img src="assets/shapes.svg" /> </swiper-slide>
+    </swiper-container>
+  </div>
+</ion-content>

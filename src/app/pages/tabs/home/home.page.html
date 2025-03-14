@@ -8,9 +8,14 @@
 </ion-header>
 
 <ion-content>
-  <app-banner [bannerImages]="banners"> </app-banner>
+  <div *ngIf="loading">
+    <ion-skeleton-text animated style="height: 25vh"></ion-skeleton-text>
+  </div>
 
-  <ion-list>
+  <app-loader *ngIf="loading"></app-loader>
+  <app-banner *ngIf="!loading" [bannerImages]="banners"> </app-banner>
+
+  <ion-list *ngIf="!loading">
     <ion-list-header class="ion-margin-bottom">
       <ion-label>
         <h4>Restaurants Nearby</h4>

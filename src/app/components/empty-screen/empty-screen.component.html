@@ -1,0 +1,17 @@
+<ion-grid style="margin-top: 2rem">
+  <ion-row>
+    <ion-col class="ion-text-center">
+      <ion-icon [name]="model?.icon ? model?.icon : ''"></ion-icon>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="ion-text-center">
+      <ion-label>
+        {{ model?.title ? model?.title : "" }}
+      </ion-label>
+      <ion-text>
+        <p>{{ model?.subtitle }}</p>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+</ion-grid>

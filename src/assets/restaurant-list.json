@@ -1,0 +1,122 @@
+[
+  {
+    "cover": "assets/shapes.svg",
+    "name": "Panda Express",
+    "short_name": "pandaexp",
+    "cuisines": ["Chinese", "Korean"],
+    "rating": 3.7,
+    "delivery_time": 26,
+    "distance": 1.8,
+    "price": 250
+  },
+  {
+    "cover": "assets/shapes.svg",
+    "name": "Golden Dragon",
+    "short_name": "goldendragon",
+    "cuisines": ["Chinese"],
+    "rating": 4.1,
+    "delivery_time": 22,
+    "distance": 3.2,
+    "price": 280
+  },
+  {
+    "cover": "assets/shapes.svg",
+    "name": "Burger Haven",
+    "short_name": "burgerhaven",
+    "cuisines": ["American", "Fast Food"],
+    "rating": 4.2,
+    "delivery_time": 18,
+    "distance": 2.3,
+    "price": 300
+  },
+  {
+    "cover": "assets/shapes.svg",
+    "name": "Big Bite Burgers",
+    "short_name": "bigbite",
+    "cuisines": ["Burgers", "Fast Food"],
+    "rating": 4.0,
+    "delivery_time": 20,
+    "distance": 1.5,
+    "price": 280
+  },
+  {
+    "cover": "assets/shapes.svg",
+    "name": "Smash Burger Co.",
+    "short_name": "smashburger",
+    "cuisines": ["Burgers", "American"],
+    "rating": 4.5,
+    "delivery_time": 25,
+    "distance": 2.7,
+    "price": 350
+  },
+  {
+    "cover": "assets/shapes.svg",
+    "name": "Spice Junction",
+    "short_name": "spicejunction",
+    "cuisines": ["Indian", "Pakistani"],
+    "rating": 4.5,
+    "delivery_time": 32,
+    "distance": 3.1,
+    "price": 400
+  },
+  {
+    "cover": "assets/shapes.svg",
+    "name": "Bella Italia",
+    "short_name": "bellaitalia",
+    "cuisines": ["Italian", "Pizza"],
+    "rating": 4.0,
+    "delivery_time": 24,
+    "distance": 2.7,
+    "price": 350
+  },
+  {
+    "cover": "assets/shapes.svg",
+    "name": "Trattoria Roma",
+    "short_name": "trattoriaroma",
+    "cuisines": ["Italian", "Pasta"],
+    "rating": 4.3,
+    "delivery_time": 28,
+    "distance": 2.9,
+    "price": 380
+  },
+  {
+    "cover": "assets/shapes.svg",
+    "name": "Luigi’s Pizzeria",
+    "short_name": "luigispizza",
+    "cuisines": ["Italian", "Pizza"],
+    "rating": 4.6,
+    "delivery_time": 22,
+    "distance": 2.0,
+    "price": 370
+  },
+  {
+    "cover": "assets/shapes.svg",
+    "name": "Sushi Delight",
+    "short_name": "sushidelight",
+    "cuisines": ["Japanese", "Sushi"],
+    "rating": 4.3,
+    "delivery_time": 29,
+    "distance": 1.5,
+    "price": 450
+  },
+  {
+    "cover": "assets/shapes.svg",
+    "name": "Tokyo Bites",
+    "short_name": "tokyobites",
+    "cuisines": ["Japanese", "Ramen"],
+    "rating": 4.5,
+    "delivery_time": 27,
+    "distance": 2.1,
+    "price": 390
+  },
+  {
+    "cover": "assets/shapes.svg",
+    "name": "Zen Sushi Bar",
+    "short_name": "zensushibar",
+    "cuisines": ["Japanese", "Sushi"],
+    "rating": 4.7,
+    "delivery_time": 24,
+    "distance": 1.8,
+    "price": 420
+  }
+]

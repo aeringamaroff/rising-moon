@@ -45,7 +45,7 @@ export class SearchPage implements OnInit {
           );
         });
         this.loading = false;
-      }, 1000);
+      }, 500);
     } else if (this.query?.length === 0) {
       this.loading = false;
       return (this.restaurants = this.allRestaurants);

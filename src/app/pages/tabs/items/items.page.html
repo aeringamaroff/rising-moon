@@ -1,0 +1,114 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="border-bottom-small">
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <img style="border-radius: 15px" [src]="data?.cover" />
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="data" class="dashed-border-bottom ion-padding-horizontal">
+      <ion-label>
+        <h1>{{data?.name}}</h1>
+        <ion-text>
+          <p>{{getCuisines(data?.cuisines)}}</p>
+        </ion-text>
+        <ion-text>
+          <p>{{data?.address}}</p>
+        </ion-text>
+      </ion-label>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label class="ion-text-center">
+          <ion-text>
+            <p><ion-icon name="star"></ion-icon>{{data?.rating}}</p>
+          </ion-text>
+          <p>Reviews</p>
+        </ion-label>
+      </ion-col>
+      <ion-col size="4">
+        <ion-label class="ion-text-center">
+          <ion-text>
+            <p>{{data?.delivery_time}} minutes</p>
+          </ion-text>
+          <p>Delivery Time</p>
+        </ion-label>
+      </ion-col>
+      <ion-col size="4">
+        <ion-label class="ion-text-center">
+          <ion-text>
+            <p>R{{data?.price}}</p>
+          </ion-text>
+          <p>Price</p>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row class="ion-padding toggle border-bottom-small">
+      <ion-label>
+        <h4>Vegetarian Options</h4>
+      </ion-label>
+      <ion-toggle
+        style="margin-left: 0.5rem"
+        mode="md"
+        color="success"
+        (ionChange)="vegetarianOnly($event)"
+        [(ngModel)]="vegetarian"
+      ></ion-toggle>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list lines="none" *ngFor="let category of categories">
+    <ion-list-header>{{category?.name}}</ion-list-header>
+    <ng-container *ngFor="let item of items; let i = index">
+      <ion-item *ngIf="category?.id === item?.category_id">
+        <ion-thumbnail slot="start">
+          <img [src]="item?.cover" />
+        </ion-thumbnail>
+        <ion-label>
+          <h4>{{item?.name}}</h4>
+          <p class="ion-text-wrap">{{item?.desc}}</p>
+          <ion-text>
+            <p>R{{item?.price}}</p>
+          </ion-text>
+        </ion-label>
+        <ion-row>
+          <ion-text class="ion-padding-horizontal" color="success"
+            >Add</ion-text
+          >
+        </ion-row>
+        <ion-row>
+          <ion-icon color="success" name="remove-outline"></ion-icon>
+          <ion-text class="ion-text-center quantity" color="success"
+            >1</ion-text
+          >
+          <ion-icon color="success" name="add-outline"></ion-icon>
+        </ion-row>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-label>
+      <h4>1 Item | R150.50</h4>
+      <ion-text color="light">
+        <p>Extra charges may apply</p>
+      </ion-text>
+    </ion-label>
+    <ion-button slot="end" fill="clear" color="light">
+      View Cart
+      <ion-icon name="basket-outline" slot="end"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

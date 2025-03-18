@@ -27,6 +27,6 @@ export class HomePage implements OnInit {
       this.restaurants = restuarantList;
 
       this.loading = false;
-    }, 1000);
+    }, 500);
   }
 }

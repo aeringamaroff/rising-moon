@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import restuarantList from '../../../../assets/restaurant-list.json';
 import itemList from '../../../../assets/item-list.json';
@@ -17,10 +17,12 @@ export class ItemsPage implements OnInit {
   items: any[] = [];
   categories: any[] = [];
   restaurants: any[] = [];
+  cartData: any = {};
   vegetarian: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private navController: NavController
   ) {}
 
@@ -42,6 +44,7 @@ export class ItemsPage implements OnInit {
 
   getItems() {
     this.data = {};
+    this.cartData = {};
     this.data = this.restaurants.find((item) => item.uid === this.id);
 
     this.categories = categoryList.filter((item) =>
@@ -53,5 +56,73 @@ export class ItemsPage implements OnInit {
     return cuisine.join(', ');
   }
 
-  vegetarianOnly(event: any) {}
+  vegetarianOnly(event: any) {
+    console.log(event.detail.checked);
+
+    this.items = [];
+
+    if (event.detail.checked === true) {
+      this.items = itemList.filter((item) => item.veg === true);
+    } else {
+      this.items = itemList;
+    }
+  }
+
+  incrementQuantity(item: any, index: number) {
+    try {
+      if (!this.items[index].quantity || this.items[index].quantity === 0) {
+        this.items[index].quantity = 1;
+      } else {
+        this.items[index].quantity++;
+      }
+
+      this.calculate();
+    } catch (error) {
+      console.error('ERROR INCREMENTING QUANTITY', error);
+    }
+  }
+
+  decreaseQuantity(item: any, index: number) {
+    try {
+      if (this.items[index].quantity !== 0) {
+        this.items[index].quantity--;
+      }
+
+      this.calculate();
+    } catch (error) {
+      console.error('ERROR DECREASING QUANTITY', error);
+    }
+  }
+
+  calculate() {
+    let cartItem = this.items.filter((item) => item.quantity > 0);
+
+    this.cartData.items = cartItem;
+
+    this.cartData.totalItems = 0;
+    this.cartData.totalPrice = 0;
+
+    cartItem.forEach((item) => {
+      this.cartData.totalItems += item.quantity;
+      this.cartData.totalPrice +=
+        parseFloat(item.price) * parseFloat(item.quantity);
+    });
+  }
+
+  async viewCart() {
+    if (this.cartData.items?.length > 0) await this.saveToCart();
+
+    // this.router.navigate([this.router.url + '/cart']);
+  }
+
+  async saveToCart() {
+    this.cartData.restaurant = {};
+    try {
+      this.cartData.restaurant = this.data;
+
+      console.log('CART ITEMS', this.cartData);
+    } catch (error) {
+      console.error('ERROR SAVING TO CART', error);
+    }
+  }
 }

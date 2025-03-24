@@ -20,24 +20,6 @@ ion-footer {
   }
 }
 
-ion-item {
-  ion-thumbnail {
-    height: 10vh;
-    width: 20vw;
-    img {
-      border-radius: 5px;
-      height: 100%;
-      width: 100%;
-    }
-  }
-
-  ion-row {
-    border: 1px solid var(--ion-color-medium);
-    border-radius: 5px;
-    padding: 0.3rem;
-  }
-}
-
 .dashed-border-bottom {
   border-bottom: 1px dashed var(--ion-color-medium);
   padding-bottom: 1vh;
@@ -46,8 +28,4 @@ ion-item {
 
 .toggle {
   align-items: center;
-}
-
-.quantity {
-  width: 2rem;
 }

@@ -20,7 +20,12 @@ export class ItemsPage implements OnInit {
   categories: any[] = [];
   restaurants: any[] = [];
   cartData: any = {};
+  model = {
+    icon: 'fast-food-outline',
+    title: 'Currently Unavailable',
+  };
   vegetarian: boolean = false;
+  loading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -54,27 +59,30 @@ export class ItemsPage implements OnInit {
     this.categories = categoryList.filter((item) =>
       this.data.cuisines.some((cuisine: string) => item.name.includes(cuisine))
     );
+    setTimeout(async () => {
+      let cart = await this.getStoredData();
 
-    let cart = await this.getStoredData();
+      if (cart?.value) {
+        this.storedData = JSON.parse(cart.value);
 
-    if (cart?.value) {
-      this.storedData = JSON.parse(cart.value);
-
-      if (this.id === this.storedData.restaurant.uid) {
-        this.items.forEach((item) => {
-          this.storedData?.items.forEach((element: any) => {
-            if (item.id !== element.id) {
-              return;
-            } else {
-              item.quantity = element.quantity;
-            }
+        if (this.id === this.storedData.restaurant.uid) {
+          this.items.forEach((item) => {
+            this.storedData?.items.forEach((element: any) => {
+              if (item.id !== element.id) {
+                return;
+              } else {
+                item.quantity = element.quantity;
+              }
+            });
           });
-        });
+        }
+
+        this.cartData.totalItems = this.storedData.totalItems;
+        this.cartData.totalPrice = this.storedData.totalPrice;
       }
 
-      this.cartData.totalItems = this.storedData.totalItems;
-      this.cartData.totalPrice = this.storedData.totalPrice;
-    }
+      this.loading = false;
+    }, 500);
   }
 
   async getStoredData() {
@@ -86,8 +94,6 @@ export class ItemsPage implements OnInit {
   }
 
   vegetarianOnly(event: any) {
-    console.log(event.detail.checked);
-
     this.items = [];
 
     if (event.detail.checked === true) {
@@ -97,7 +103,7 @@ export class ItemsPage implements OnInit {
     }
   }
 
-  incrementQuantity(item: any, index: number) {
+  incrementQuantity(index: number) {
     try {
       if (!this.items[index].quantity || this.items[index].quantity === 0) {
         this.items[index].quantity = 1;
@@ -111,7 +117,7 @@ export class ItemsPage implements OnInit {
     }
   }
 
-  decreaseQuantity(item: any, index: number) {
+  decreaseQuantity(index: number) {
     try {
       if (this.items[index].quantity !== 0) {
         this.items[index].quantity--;

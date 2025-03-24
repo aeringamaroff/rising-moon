@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Preferences } from '@capacitor/preferences';
 import restuarantList from '../../../../assets/restaurant-list.json';
 import itemList from '../../../../assets/item-list.json';
 import categoryList from '../../../../assets/category-list.json';
@@ -14,6 +15,7 @@ import categoryList from '../../../../assets/category-list.json';
 export class ItemsPage implements OnInit {
   id: any;
   data: any = {};
+  storedData: any = {};
   items: any[] = [];
   categories: any[] = [];
   restaurants: any[] = [];
@@ -42,14 +44,41 @@ export class ItemsPage implements OnInit {
     });
   }
 
-  getItems() {
+  async getItems() {
     this.data = {};
     this.cartData = {};
+    this.storedData = {};
+
     this.data = this.restaurants.find((item) => item.uid === this.id);
 
     this.categories = categoryList.filter((item) =>
       this.data.cuisines.some((cuisine: string) => item.name.includes(cuisine))
     );
+
+    let cart = await this.getStoredData();
+
+    if (cart?.value) {
+      this.storedData = JSON.parse(cart.value);
+
+      if (this.id === this.storedData.restaurant.uid) {
+        this.items.forEach((item) => {
+          this.storedData?.items.forEach((element: any) => {
+            if (item.id !== element.id) {
+              return;
+            } else {
+              item.quantity = element.quantity;
+            }
+          });
+        });
+      }
+
+      this.cartData.totalItems = this.storedData.totalItems;
+      this.cartData.totalPrice = this.storedData.totalPrice;
+    }
+  }
+
+  async getStoredData() {
+    return await Preferences.get({ key: 'cart' });
   }
 
   getCuisines(cuisine: any) {
@@ -119,6 +148,11 @@ export class ItemsPage implements OnInit {
     this.cartData.restaurant = {};
     try {
       this.cartData.restaurant = this.data;
+
+      await Preferences.set({
+        key: 'cart',
+        value: JSON.stringify(this.cartData),
+      });
 
       console.log('CART ITEMS', this.cartData);
     } catch (error) {

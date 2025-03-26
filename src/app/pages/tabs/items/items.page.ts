@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Preferences } from '@capacitor/preferences';
 import restuarantList from '../../../../assets/restaurant-list.json';
@@ -142,16 +142,24 @@ export class ItemsPage implements OnInit {
       this.cartData.totalPrice +=
         parseFloat(item.price) * parseFloat(item.quantity);
     });
+
+    if (this.cartData.totalItems <= 0) {
+      Preferences.remove({ key: 'cart' });
+    }
   }
 
   async viewCart() {
     if (this.cartData.items?.length > 0) await this.saveToCart();
 
-    // this.router.navigate([this.router.url + '/cart']);
+    const extras: NavigationExtras = {};
+    extras.state = { isItemCart: true, restaurantId: this.data.uid };
+
+    this.router.navigate([this.router.url + '/cart'], extras);
   }
 
   async saveToCart() {
     this.cartData.restaurant = {};
+
     try {
       this.cartData.restaurant = this.data;
 

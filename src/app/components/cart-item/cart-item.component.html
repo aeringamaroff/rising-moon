@@ -1,0 +1,23 @@
+<ion-item>
+  <ion-label class="ion-text-wrap">{{ item.name }}</ion-label>
+
+  <ion-row>
+    <ion-icon
+      name="remove-outline"
+      color="success"
+      (click)="decreaseQuantity()"
+    ></ion-icon>
+    <ion-text class="ion-text-center quantity">{{ item.quantity }}</ion-text>
+    <ion-icon
+      name="add-outline"
+      color="success"
+      (click)="incrementQuantity()"
+    ></ion-icon>
+  </ion-row>
+
+  <ion-label class="price">
+    <ion-text color="dark">
+      R{{ item.price * item.quantity | number : "0.2-2" }}
+    </ion-text>
+  </ion-label>
+</ion-item>

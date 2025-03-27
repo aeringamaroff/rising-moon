@@ -1,13 +1,121 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>cart</ion-title>
+    <ion-title>Cart</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="prevUrl" *ngIf="isItemCart">
+      </ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">cart</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <app-empty-screen *ngIf="!model?.restaurant"> </app-empty-screen>
+
+  <ng-container *ngIf="model?.restaurant">
+    <ion-list lines="none" class="border-bottom-small">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-img [src]="model?.restaurant?.cover"></ion-img>
+        </ion-thumbnail>
+        <ion-label>
+          <ion-text>
+            <h4>{{model?.restaurant?.name}}</h4>
+          </ion-text>
+
+          <ion-note>{{model?.restaurant?.address}}</ion-note>
+        </ion-label>
+      </ion-item>
+
+      <app-cart-item
+        *ngFor="let item of model?.items; let i = index"
+        [item]="item"
+        [index]="i"
+        (add)="incrementQuantity($event)"
+        (remove)="decreaseQuantity($event)"
+      ></app-cart-item>
+    </ion-list>
+
+    <ion-item lines="none" class="border-bottom-small">
+      <ion-icon name="list-outline" slot="start"></ion-icon>
+      <ion-input
+        type="text"
+        placeholder="Delivery Instructions"
+        [(ngModel)]="instructions"
+      ></ion-input>
+    </ion-item>
+
+    <ion-list class="border-bottom-small">
+      <ion-list-header>
+        <ion-label color="primary">Billing Details</ion-label>
+      </ion-list-header>
+      <ion-item lines="none">
+        <ion-label>Item Total</ion-label>
+        <ion-text color="dark">R {{model?.totalPrice}}</ion-text>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>Delivery</ion-label>
+        <ion-text color="dark">R {{model?.deliveryCharge}}</ion-text>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>Total</ion-label>
+        <ion-text color="dark" style="font-weight: bold"
+          >R {{model?.finalTotal | number : "0.2-2"}}</ion-text
+        >
+      </ion-item>
+    </ion-list>
+  </ng-container>
 </ion-content>
+
+<ion-footer *ngIf="model?.restaurant">
+  <ion-toolbar>
+    <ion-row *ngIf="!location?.lat">
+      <ion-col>
+        <ion-button
+          expand="block"
+          fill="outline"
+          color="success"
+          (click)="addAddress()"
+        >
+          Add Address
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <!-- * note: probably can remove this -->
+        <ion-button expand="block" color="success" (click)="changeAddress()">
+          Change Address
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-item *ngIf="location?.lat" lines="none">
+      <ion-button slot="end" fill="clear" (click)="changeAddress()"
+        >Change</ion-button
+      >
+      <ion-icon name="home-outline" slot="start"></ion-icon>
+      <ion-label>
+        Deliver to:
+        <ion-text color="medium">
+          <p>{{ location?.address }}</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-row *ngIf="location?.lat">
+      <ion-col>
+        <!-- TODO: If the item list exceeds the viewport, display this element to scroll to the bottom -->
+        <!-- <ion-item lines="none">
+          <ion-label>
+            <h6>{{model?.finalTotal}}</h6>
+            <ion-text color="secondary"
+              >View Details
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </ion-text>
+          </ion-label>
+        </ion-item> -->
+
+        <ion-button color="success" expand="block" (click)="pay()">
+          Pay
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

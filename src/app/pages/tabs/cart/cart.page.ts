@@ -115,7 +115,7 @@ export class CartPage implements OnInit {
 
   changeAddress() {}
 
-  pay() {
+  async pay() {
     try {
       const data = {
         restaurant_id: this.model.restaurant.uid,
@@ -131,6 +131,11 @@ export class CartPage implements OnInit {
       };
 
       console.log('ORDER DATA', data);
+
+      await Preferences.set({
+        key: 'cart',
+        value: JSON.stringify(data),
+      });
     } catch (error) {
       console.error('ERROR INITIATING PAYMENT', error);
     }

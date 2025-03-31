@@ -11,6 +11,7 @@
 <ion-content class="ion-padding">
   <app-empty-screen *ngIf="!model?.restaurant"> </app-empty-screen>
 
+  <!--TODO: if ordering from multiple restaurants only one is displayed-->
   <ng-container *ngIf="model?.restaurant">
     <ion-list lines="none" class="border-bottom-small">
       <ion-item>

@@ -1,0 +1,46 @@
+<ion-item-group class="border-bottom-small">
+  <ion-item lines="none" class="dashed-border-bottom">
+    <ion-label>
+      {{ order?.restaurant_details?.name }}
+      <p>{{ order?.restaurant_details?.address }}</p>
+      <ion-text>
+        <p>
+          R{{ order?.final_total }}
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </p>
+      </ion-text>
+    </ion-label>
+    <ion-note slot="end" color="dark"
+      >{{ order?.status }}
+      <ion-icon name="checkmark-circle-outline" color="success"></ion-icon>
+    </ion-note>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label>
+      <ion-text color="dark" *ngFor="let item of order?.order">
+        <p>{{ item?.name }} x {{ item?.quantity }}</p>
+      </ion-text>
+      <p style="margin-top: 1vh">{{ order?.date }}</p>
+      <ion-row>
+        <ion-col>
+          <ion-button
+            fill="outline"
+            expand="block"
+            color="primary"
+            (click)="recreateOrder()"
+            >Reorder</ion-button
+          >
+        </ion-col>
+        <ion-col>
+          <ion-button
+            fill="outline"
+            expand="block"
+            color="dark"
+            (click)="getHelp()"
+            >Get Help</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-label>
+  </ion-item>
+</ion-item-group>

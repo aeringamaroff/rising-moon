@@ -1,0 +1,54 @@
+[
+  {
+    "restaurant_id": "321er23434v",
+    "restaurant_details": {
+      "uid": "321er23434v",
+      "cover": "assets/shapes.svg",
+      "name": "Panda Express",
+      "short_name": "pandaexp",
+      "cuisines": ["Chinese", "Korean"],
+      "rating": 3.7,
+      "delivery_time": 26,
+      "distance": 1.8,
+      "address": "Main Rd, Sandton"
+    },
+    "order": "[{\"category_id\":\"1\",\"cover\":\"assets/shapes.svg\",\"desc\":\"Authentic Chinese dumplings\",\"id\":\"i1\",\"name\":\"Dumplings\",\"price\":90.75,\"rating\":0,\"status\":true,\"uid\":\"uid1\",\"variation\":false,\"veg\":false,\"quantity\":1},{\"category_id\":\"1\",\"cover\":\"assets/shapes.svg\",\"desc\":\"Classic Chinese fried rice\",\"id\":\"i2\",\"name\":\"Fried Rice\",\"price\":110,\"rating\":0,\"status\":true,\"uid\":\"uid2\",\"variation\":false,\"veg\":true,\"quantity\":1},{\"category_id\":\"4\",\"cover\":\"assets/shapes.svg\",\"desc\":\"Juicy American-style steak\",\"id\":\"i5\",\"name\":\"Grilled Steak\",\"price\":250,\"rating\":0,\"status\":true,\"uid\":\"uid5\",\"variation\":false,\"veg\":false,\"quantity\":2},{\"category_id\":\"5\",\"cover\":\"assets/shapes.svg\",\"desc\":\"Classic fries with salt\",\"id\":\"i6\",\"name\":\"French Fries\",\"price\":50.25,\"rating\":0,\"status\":true,\"uid\":\"uid6\",\"variation\":false,\"veg\":true,\"quantity\":1}]",
+    "address": {
+      "lat": -25.792457,
+      "lng": 27.652519,
+      "address": "Main Str, Rhodie"
+    },
+    "date": "28 March 2025 04:05 pm",
+    "total": 751,
+    "delivery": 75.1,
+    "final_total": 826.1,
+    "status": "CREATED",
+    "paid": "COD"
+  },
+  {
+    "restaurant_id": "1qalkaw373nnvfhf426",
+    "restaurant_details": {
+      "uid": "1qalkaw373nnvfhf426",
+      "cover": "assets/shapes.svg",
+      "name": "Mama Obo's",
+      "short_name": "tokyobites",
+      "cuisines": ["Nigerian"],
+      "rating": 3.7,
+      "delivery_time": 19,
+      "distance": 4.3,
+      "address": "Main Str, Hillbrow"
+    },
+    "order": "[{\"category_id\":\"1\",\"cover\":\"assets/shapes.svg\",\"desc\":\"Authentic Chinese dumplings\",\"id\":\"i1\",\"name\":\"Dumplings\",\"price\":90.75,\"rating\":0,\"status\":true,\"uid\":\"uid1\",\"variation\":false,\"veg\":false,\"quantity\":1},{\"category_id\":\"1\",\"cover\":\"assets/shapes.svg\",\"desc\":\"Classic Chinese fried rice\",\"id\":\"i2\",\"name\":\"Fried Rice\",\"price\":110,\"rating\":0,\"status\":true,\"uid\":\"uid2\",\"variation\":false,\"veg\":true,\"quantity\":1},{\"category_id\":\"4\",\"cover\":\"assets/shapes.svg\",\"desc\":\"Juicy American-style steak\",\"id\":\"i5\",\"name\":\"Grilled Steak\",\"price\":250,\"rating\":0,\"status\":true,\"uid\":\"uid5\",\"variation\":false,\"veg\":false,\"quantity\":2},{\"category_id\":\"5\",\"cover\":\"assets/shapes.svg\",\"desc\":\"Classic fries with salt\",\"id\":\"i6\",\"name\":\"French Fries\",\"price\":50.25,\"rating\":0,\"status\":true,\"uid\":\"uid6\",\"variation\":false,\"veg\":true,\"quantity\":1}]",
+    "address": {
+      "lat": -25.792457,
+      "lng": 27.652519,
+      "address": "Main Str, Rhodie"
+    },
+    "date": "29 March 2025 04:05 pm",
+    "total": 751,
+    "delivery": 75.1,
+    "final_total": 826.1,
+    "status": "CREATED",
+    "paid": "COD"
+  }
+]

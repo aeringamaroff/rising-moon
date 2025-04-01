@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Preferences } from '@capacitor/preferences';
-import restuarantList from '../../../../assets/restaurant-list.json';
-import itemList from '../../../../assets/item-list.json';
-import categoryList from '../../../../assets/category-list.json';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-items',
@@ -28,14 +26,16 @@ export class ItemsPage implements OnInit {
   loading: boolean = true;
 
   constructor(
+    private apiService: ApiService,
     private route: ActivatedRoute,
     private router: Router,
     private navController: NavController
   ) {}
 
   ngOnInit() {
-    this.restaurants = restuarantList;
-    this.items = itemList;
+    this.restaurants = this.apiService.restaurants;
+    this.items = this.apiService.items;
+    this.categories = this.apiService.categories;
 
     this.route.paramMap.subscribe((paramMap) => {
       if (!paramMap.has('restaurantId')) {
@@ -56,7 +56,7 @@ export class ItemsPage implements OnInit {
 
     this.data = this.restaurants.find((item) => item.uid === this.id);
 
-    this.categories = categoryList.filter((item) =>
+    this.categories = this.categories.filter((item) =>
       this.data.cuisines.some((cuisine: string) => item.name.includes(cuisine))
     );
     setTimeout(async () => {
@@ -65,9 +65,10 @@ export class ItemsPage implements OnInit {
       if (cart?.value) {
         this.storedData = JSON.parse(cart.value);
 
-        if (this.id === this.storedData.restaurant.uid) {
+        if (this.id === this.storedData.restaurant_details.uid) {
+          let orderDetails = JSON.parse(this.storedData.order);
           this.items.forEach((item) => {
-            this.storedData?.items.forEach((element: any) => {
+            orderDetails.forEach((element: any) => {
               if (item.id !== element.id) {
                 return;
               } else {
@@ -97,9 +98,9 @@ export class ItemsPage implements OnInit {
     this.items = [];
 
     if (event.detail.checked === true) {
-      this.items = itemList.filter((item) => item.veg === true);
+      this.items = this.items.filter((item) => item.veg === true);
     } else {
-      this.items = itemList;
+      this.items = this.apiService.items;
     }
   }
 

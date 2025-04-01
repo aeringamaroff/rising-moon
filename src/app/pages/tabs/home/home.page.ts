@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import restuarantList from '../../../../assets/restaurant-list.json';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -13,18 +12,12 @@ export class HomePage implements OnInit {
   restaurants: any[] = [];
   loading: boolean = true;
 
-  constructor() {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit() {
     setTimeout(() => {
-      this.banners = [
-        { banner: 'assets/shapes.svg' },
-        { banner: 'assets/shapes.svg' },
-        { banner: 'assets/shapes.svg' },
-        { banner: 'assets/shapes.svg' },
-      ];
-
-      this.restaurants = restuarantList;
+      this.restaurants = this.apiService.restaurants;
+      this.banners = this.apiService.banners;
 
       this.loading = false;
     }, 500);

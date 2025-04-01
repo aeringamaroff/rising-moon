@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import restuarantList from '../../../../assets/restaurant-list.json';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-search',
@@ -11,7 +11,7 @@ export class SearchPage implements OnInit {
   @ViewChild('searchbar') searchInput: any;
 
   loading?: boolean;
-  allRestaurants: any[] = restuarantList;
+  allRestaurants: any[] = [];
   restaurants: any[] = [];
   query: any;
   model: any = {
@@ -19,12 +19,13 @@ export class SearchPage implements OnInit {
     title: 'No Results Found',
   };
 
-  constructor() {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.restaurants = this.allRestaurants;
-
     setTimeout(() => {
+      this.allRestaurants = this.apiService.restaurants;
+      this.restaurants = this.allRestaurants;
+
       this.searchInput.setFocus();
     }, 500);
   }

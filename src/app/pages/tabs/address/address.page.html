@@ -19,7 +19,7 @@
     <ion-item-group class="ion-padding">
       <ion-item *ngFor="let address of addresses" lines="full">
         <ion-icon
-          [name]="address.title === 'Home' ? 'home-outline' : 'location-outline'"
+          [name]="getIcon(address.title)"
           slot="start"
           color="medium"
         ></ion-icon>
@@ -29,10 +29,16 @@
             <p class="ion-text-wrap">{{ address?.address }}</p>
           </ion-text>
           <ion-row>
-            <ion-button fill="clear" color="primary" (click)="editAddress()"
+            <ion-button
+              fill="clear"
+              color="primary"
+              (click)="editAddress(address)"
               >Edit</ion-button
             >
-            <ion-button fill="clear" color="primary" (click)="deleteAddress()"
+            <ion-button
+              fill="clear"
+              color="primary"
+              (click)="deleteAddress(address)"
               >Delete</ion-button
             >
           </ion-row>

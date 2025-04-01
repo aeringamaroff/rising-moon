@@ -10,8 +10,6 @@ import {
   providedIn: 'root',
 })
 export class GlobalService {
-  loading: boolean = false;
-
   constructor(
     private alertController: AlertController,
     private toastController: ToastController,
@@ -19,8 +17,21 @@ export class GlobalService {
     private modalController: ModalController
   ) {}
 
-  async showAlert(message: string, header?: string, buttons?: any) {
-    await this.alertController
+  getIcon(title: string) {
+    const name = title.toLowerCase();
+
+    switch (name) {
+      case 'home':
+        return 'home-outline';
+      case 'work':
+        return 'briefcase-outline';
+      default:
+        return 'location-outline';
+    }
+  }
+
+  showAlert(message: string, header?: string, buttons?: any) {
+    this.alertController
       .create({
         header,
         message,
@@ -48,21 +59,13 @@ export class GlobalService {
   }
 
   async showLoader(message?: string) {
-    this.loading = true;
-
     return await this.loadingController
       .create({
         message,
         spinner: 'bubbles',
       })
       .then((loader) => {
-        loader.present().then(() => {
-          if (!this.loading) {
-            loader.dismiss().then(() => {
-              console.log('loader dismissed');
-            });
-          }
-        });
+        loader.present();
       })
       .catch((error) => {
         console.error('error showing loader', error);
@@ -70,8 +73,6 @@ export class GlobalService {
   }
 
   async hideLoader() {
-    this.loading = false;
-
     return await this.loadingController.dismiss();
   }
 
@@ -85,5 +86,15 @@ export class GlobalService {
     console.log('modal data', data);
 
     if (data) return data;
+  }
+
+  async dismissModal(value?: any) {
+    let data;
+
+    if (value) {
+      data = value;
+    }
+
+    await this.modalController.dismiss(data);
   }
 }

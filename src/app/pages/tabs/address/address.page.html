@@ -10,17 +10,23 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <div *ngIf="loading" class="ion-text-center spinner">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+
+  <ion-list *ngIf="!loading && addresses?.length">
     <ion-item-divider>Saved Addresses</ion-item-divider>
     <ion-item-group class="ion-padding">
-      <ion-item lines="full">
-        <ion-icon name="home-outline" slot="start" color="medium"></ion-icon>
+      <ion-item *ngFor="let address of addresses" lines="full">
+        <ion-icon
+          [name]="address.title === 'Home' ? 'home-outline' : 'location-outline'"
+          slot="start"
+          color="medium"
+        ></ion-icon>
         <ion-label>
-          <h4 class="ion-padding-bottom">Address title</h4>
+          <h4 class="ion-padding-bottom">{{ address?.title }}</h4>
           <ion-text color="medium">
-            <p class="ion-text-wrap">
-              this is a long text string used as a placeholder
-            </p>
+            <p class="ion-text-wrap">{{ address?.address }}</p>
           </ion-text>
           <ion-row>
             <ion-button fill="clear" color="primary" (click)="editAddress()"
